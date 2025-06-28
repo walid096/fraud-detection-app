@@ -107,24 +107,77 @@ with tab4:
     export_results(st.session_state['history'])
 
 # Optionally: allow batch verification (CSV upload)
-st.sidebar.header("Vérification par lot")
+# --- Vérification par lot (CSV Upload) ---
+st.sidebar.header("📂 Vérification par lot")
+
 uploaded_file = st.sidebar.file_uploader("Charger un fichier CSV de transactions", type="csv")
 if uploaded_file:
-    batch_df = pd.read_csv(uploaded_file)
+    # 🔹 Lecture du fichier CSV et nettoyage des noms de colonnes
+    batch_df = pd.read_csv(uploaded_file, encoding='utf-8')  # UTF-8 recommandé
+    batch_df.columns = batch_df.columns.str.strip().str.lower().str.replace(' ', '')
+
+    # 🔹 Colonnes attendues (en minuscules dans le CSV)
+    REQUIRED_COLS = [
+        'transactionamount', 'customerage', 'transactionduration',
+        'loginattempts', 'accountbalance', 'transactiontype',
+        'channel', 'customeroccupation'
+    ]
+
+    # 🔎 Vérifie les colonnes manquantes
+    missing_cols = [col for col in REQUIRED_COLS if col not in batch_df.columns]
+    if missing_cols:
+        st.sidebar.error(f"❌ Fichier invalide : colonnes manquantes {missing_cols}")
+        st.stop()
+
+    # 🔁 Mapping vers les noms attendus par le modèle
+    key_mapping = {
+        'transactionamount': 'TransactionAmount',
+        'customerage': 'CustomerAge',
+        'transactionduration': 'TransactionDuration',
+        'loginattempts': 'LoginAttempts',
+        'accountbalance': 'AccountBalance',
+        'transactiontype': 'TransactionType',
+        'channel': 'Channel',
+        'customeroccupation': 'CustomerOccupation'
+    }
+
     results = []
     for idx, row in batch_df.iterrows():
-        transaction_df = process_transaction_input(row.to_dict())
+        row_dict = row.to_dict()
+        mapped_row = {key_mapping[k]: v for k, v in row_dict.items() if k in key_mapping}
+
+        transaction_df = process_transaction_input(mapped_row)
         transaction_scaled = normalize_transaction(transaction_df, scaler)
         suspect, risk_score, reasons = evaluate_transaction(
             model, transaction_scaled, feature_names
         )[:3]
+
         results.append({
-            **row.to_dict(),
+            **row.to_dict(),  # garde les données originales
             'risk_score': risk_score,
             'suspect': suspect,
             'reasons': "; ".join(reasons) if reasons else ""
         })
+
     results_df = pd.DataFrame(results)
-    st.sidebar.success("Vérification terminée !")
+    st.sidebar.success("✅ Vérification terminée !")
     st.sidebar.dataframe(results_df)
+
+    # 🔁 Exporter les résultats
     export_results(results_df, filename="resultats_batch.csv")
+
+# --- 📥 Téléchargement du modèle de CSV ---
+def get_csv_template():
+    df = pd.DataFrame(columns=[
+        'transactionamount', 'customerage', 'transactionduration',
+        'loginattempts', 'accountbalance', 'transactiontype',
+        'channel', 'customeroccupation'
+    ])
+    return df.to_csv(index=False)
+
+st.sidebar.download_button(
+    label="📥 Télécharger le modèle CSV",
+    data=get_csv_template(),
+    file_name="modele_transactions.csv",
+    mime="text/csv"
+)
