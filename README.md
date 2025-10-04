@@ -5,22 +5,24 @@
 [![Machine Learning](https://img.shields.io/badge/ML-K--Means%20Clustering-green.svg)](https://scikit-learn.org)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **A sophisticated real-time fraud detection system using unsupervised machine learning to identify suspicious banking transactions with 95%+ accuracy.**
+> **A  real-time fraud detection system using unsupervised machine learning to identify suspicious banking transactions with 95%+ accuracy.**
 
 ## 🎯 **Project Overview**
 
-This project implements a **production-ready fraud detection system** that leverages **K-Means clustering** and **anomaly detection** techniques to identify potentially fraudulent banking transactions in real-time. The system features an intuitive web interface built with Streamlit, comprehensive data visualization, and batch processing capabilities.
+This project implements a **fraud detection system** that leverages **K-Means clustering** and **anomaly detection** techniques to identify potentially fraudulent banking transactions in real-time. The system features an intuitive web interface built with Streamlit, comprehensive data visualization, and batch processing capabilities.
 
-### 🏆 **Key Achievements**
-- ✅ **Real-time fraud detection** with sub-second response times
-- ✅ **Unsupervised learning approach** - no labeled fraud data required
-- ✅ **Comprehensive feature engineering** with 19 engineered features
-- ✅ **Interactive web dashboard** with advanced visualizations
-- ✅ **Batch processing capabilities** for large-scale transaction analysis
-- ✅ **Explainable AI** - provides reasons for fraud suspicions
-- ✅ **Production-ready architecture** with modular design
 
 ## 🚀 **Live Demo Features**
+<img width="906" height="433" alt="image" src="https://github.com/user-attachments/assets/242d75a2-ed7a-4d31-909b-8cee51687e6c" />
+<img width="907" height="444" alt="image" src="https://github.com/user-attachments/assets/cd381f0f-c9b3-4b9d-ba13-6b57eff9814a" />
+<img width="910" height="496" alt="image" src="https://github.com/user-attachments/assets/ba2c06ec-e6f3-40b9-be08-b1c0545c0244" />
+<img width="903" height="448" alt="image" src="https://github.com/user-attachments/assets/c2c1402a-a9c1-4c24-90d7-4f1be5bfe050" />
+<img width="903" height="429" alt="image" src="https://github.com/user-attachments/assets/9e26261e-1c98-4fd1-aee4-880378fee1c5" />
+<img width="899" height="437" alt="image" src="https://github.com/user-attachments/assets/32db6090-febd-49e8-83ed-408b52770475" />
+<img width="900" height="456" alt="image" src="https://github.com/user-attachments/assets/5fce1609-3a09-43b7-9cf1-b1a03c88216f" />
+<img width="914" height="472" alt="image" src="https://github.com/user-attachments/assets/743e52e9-6b8a-4231-8a48-4f1791b1fc21" />
+
+
 
 ### 🎮 **Interactive Web Interface**
 - **Real-time Transaction Analysis**: Input transaction details and receive instant fraud risk assessment
@@ -81,7 +83,6 @@ The system processes raw transaction data through sophisticated feature engineer
 ### **Detection Methodology**
 - **Algorithm**: K-Means Clustering with Euclidean Distance-based Anomaly Detection
 - **Threshold**: Configurable distance threshold (default: 2.0 standard deviations)
-- **Features**: 19 engineered features from raw transaction data
 - **Scalability**: Handles both single transactions and batch processing
 
 ### **Risk Assessment Logic**
@@ -226,33 +227,4 @@ fraud-detection-app/
 - **Memory Usage**: < 500MB for typical workloads
 - **Accuracy**: 95%+ fraud detection rate (based on validation)
 
-## 🤝 **Contributing**
 
-We welcome contributions! Please see our contributing guidelines:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 **License**
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 **Author**
-
-**Your Name** - *Data Scientist & Machine Learning Engineer*
-- LinkedIn: [Your LinkedIn Profile]
-- GitHub: [Your GitHub Profile]
-- Email: your.email@example.com
-
-## 🙏 **Acknowledgments**
-
-- Scikit-learn team for the excellent ML library
-- Streamlit team for the amazing web framework
-- The open-source community for continuous inspiration
-
----
-
-**⭐ If you found this project helpful, please give it a star!**
